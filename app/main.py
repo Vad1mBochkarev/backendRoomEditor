@@ -11,24 +11,15 @@ from app.core.database import engine, get_db
 from app.models import Base
 from app.api.status import router as api_status
 from app.api.users import router as users_router
-from app.api.furniture import router as furniture_router
+from app.api.objects_3d import router as objects_3d_router
 from app.api.projects import router as projects_router
 from seed_data import seed_database
 
 
-<<<<<<< HEAD
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup: создание таблиц и заполнение данными
     Base.metadata.create_all(bind=engine)
-=======
-app = FastAPI(title="Room Editor API")
-
-
-# Заполнение базы данных примерами при запуске приложения.
-@app.on_event("startup")
-async def seed_data_on_startup():
->>>>>>> bbfb24bff09651e66f4e29afedce9037a18cbac2
     db = next(get_db())
     seed_database(db)
     yield
@@ -52,7 +43,5 @@ app.add_middleware(
 
 app.include_router(api_status)
 app.include_router(users_router)
-app.include_router(furniture_router)
+app.include_router(objects_3d_router)
 app.include_router(projects_router)
-
-

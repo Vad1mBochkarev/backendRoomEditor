@@ -192,3 +192,20 @@ package-lock.json
 *.backup
 *.old
 *.orig
+
+# Migration scripts
+migrations/
+alembic/
+alembic.ini
+
+# Database backup files
+*.dump
+*.sql
+
+# Local development scripts
+scripts/
+local/
+
+# Temporary test files
+test_*.py
+*_test.py

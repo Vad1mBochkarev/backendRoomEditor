@@ -45,11 +45,11 @@ class ProjectItem(Base):
     project_id: Mapped[UUID] = mapped_column(ForeignKey("projects.id"))
     project: Mapped["Project"] = relationship(back_populates="items")
 
-    furniture_id: Mapped[UUID] = mapped_column(ForeignKey('furniture.id'))
-    furniture: Mapped["Furniture"] = relationship(back_populates="project_items")
+    object_3d_id: Mapped[UUID] = mapped_column(ForeignKey('3d_objects.id'))
+    object_3d: Mapped["Object3D"] = relationship(back_populates="project_items")
 
-class Furniture(Base):
-    __tablename__ = "furniture"
+class Object3D(Base):
+    __tablename__ = "3d_objects"
 
     id: Mapped[UUID] = mapped_column(Uuid, primary_key=True, default=uuid4)
     name: Mapped[str] = mapped_column(String())
@@ -58,16 +58,16 @@ class Furniture(Base):
     file_url: Mapped[str] = mapped_column(String)
     preview: Mapped[Optional[bytes]] = mapped_column(LargeBinary, nullable=True)
 
-    category_id: Mapped[UUID] = mapped_column(ForeignKey("furniture_categories.id"))
-    category: Mapped["FurnitureCategories"] = relationship(back_populates="furniture")
+    category_id: Mapped[UUID] = mapped_column(ForeignKey("3d_object_categories.id"))
+    category: Mapped["Object3DCategory"] = relationship(back_populates="objects_3d")
 
-    project_items: Mapped[list["ProjectItem"]] = relationship(back_populates="furniture")
+    project_items: Mapped[list["ProjectItem"]] = relationship(back_populates="object_3d")
 
 
-class FurnitureCategories(Base):
-    __tablename__ = "furniture_categories"
+class Object3DCategory(Base):
+    __tablename__ = "3d_object_categories"
 
     id: Mapped[UUID] = mapped_column(Uuid, primary_key=True, default=uuid4)
     name: Mapped[str] = mapped_column(String(60))
 
-    furniture: Mapped[list["Furniture"]] = relationship(back_populates="category")
+    objects_3d: Mapped[list["Object3D"]] = relationship(back_populates="category")

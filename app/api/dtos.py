@@ -34,8 +34,8 @@ class ProjectResponse(ProjectBase):
     model_config = ConfigDict(from_attributes=True)
 
 
-# Схемы для мебели
-class FurnitureResponse(BaseModel):
+# Схемы для 3D объектов
+class Object3DResponse(BaseModel):
     id: UUID
     name: str
     category_id: UUID

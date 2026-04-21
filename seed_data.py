@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
-from app.models import Furniture, FurnitureCategories
+from app.models import Object3D, Object3DCategory
 from uuid import UUID, uuid4
 
-def seed_furniture_categories(db: Session):
-    """Добавление примеров категорий мебели в базу данных"""
+def seed_3d_object_categories(db: Session):
+    """Добавление примеров категорий 3D объектов в базу данных"""
     categories_data = [
         {"id": UUID('c1a5c1d4-3d4b-4e5f-9b4a-5d6e7f8a9b0c'), "name": "Столы"},
         {"id": UUID('d2b6d2e5-4e5c-5f6a-0c5b-6e7f8a9b0c1d'), "name": "Стулья"},
@@ -14,10 +14,10 @@ def seed_furniture_categories(db: Session):
     
     for category_data in categories_data:
         # Проверяем, существует ли категория с таким ID
-        existing_category = db.query(FurnitureCategories).filter(FurnitureCategories.id == category_data["id"]).first()
+        existing_category = db.query(Object3DCategory).filter(Object3DCategory.id == category_data["id"]).first()
         if not existing_category:
             # Создаем новую категорию
-            category = FurnitureCategories(
+            category = Object3DCategory(
                 id=category_data["id"],
                 name=category_data["name"]
             )
@@ -25,9 +25,9 @@ def seed_furniture_categories(db: Session):
     
     db.commit()
 
-def seed_furniture(db: Session):
-    """Добавление примеров мебели в базу данных с пустым file_url"""
-    furniture_data = [
+def seed_3d_objects(db: Session):
+    """Добавление примеров 3D объектов в базу данных с пустым file_url"""
+    objects_3d_data = [
         {
             "id": UUID('a1b2c3d4-e5f6-7890-abcd-ef1234567890'),
             "name": "Обеденный стол",
@@ -65,19 +65,19 @@ def seed_furniture(db: Session):
         }
     ]
     
-    for item_data in furniture_data:
-        # Проверяем, существует ли мебель с таким ID
-        existing_furniture = db.query(Furniture).filter(Furniture.id == item_data["id"]).first()
-        if not existing_furniture:
-            # Создаем новую мебель
-            furniture = Furniture(
+    for item_data in objects_3d_data:
+        # Проверяем, существует ли 3D объект с таким ID
+        existing_object = db.query(Object3D).filter(Object3D.id == item_data["id"]).first()
+        if not existing_object:
+            # Создаем новый 3D объект
+            object_3d = Object3D(
                 id=item_data["id"],
                 name=item_data["name"],
                 category_id=item_data["category_id"],
                 file_size=item_data["file_size"],
                 file_url=item_data["file_url"]  # Пустое значение
             )
-            db.add(furniture)
+            db.add(object_3d)
     
     db.commit()
 
@@ -85,13 +85,13 @@ def seed_database(db: Session):
     """Заполнение базы данных примерами"""
     print("Заполнение базы данных примерами...")
     
-    # Добавляем категории мебели
-    seed_furniture_categories(db)
-    print("Категории мебели добавлены")
+    # Добавляем категории 3D объектов
+    seed_3d_object_categories(db)
+    print("Категории 3D объектов добавлены")
     
-    # Добавляем мебель
-    seed_furniture(db)
-    print("Примеры мебели добавлены")
+    # Добавляем 3D объекты
+    seed_3d_objects(db)
+    print("Примеры 3D объектов добавлены")
     
     print("База данных успешно заполнена!")
 
