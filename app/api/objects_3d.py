@@ -1,6 +1,6 @@
-from fastapi import APIRouter, status, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
-from uuid import UUID, uuid4
+from uuid import UUID
 
 from app.models import Object3D, Object3DCategory
 from app.api.dtos import Object3DResponse, CategoryResponse
