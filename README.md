@@ -1,6 +1,6 @@
 # Room Editor Backend
 
-Backend API for Room Editor - a 3D room design application that allows users to create and customize interior designs with furniture placement.
+Backend API for Room Editor - a 3D room design application that allows users to create and customize interior designs with 3D object placement.
 
 ## Table of Contents
 - [Technologies](#technologies)
@@ -82,9 +82,9 @@ The database consists of the following models:
 
 - **User**: Application users with login credentials
 - **Project**: User-created room design projects
-- **ProjectItem**: Individual furniture items placed in a project
-- **Furniture**: Available furniture pieces with 3D model information
-- **FurnitureCategories**: Categories for organizing furniture
+- **ProjectItem**: Individual 3D objects placed in a project
+- **Object3D**: Available 3D objects with model information
+- **Object3DCategory**: Categories for organizing 3D objects
 
 ## API Endpoints
 
@@ -92,7 +92,7 @@ The API provides endpoints for:
 
 - User authentication and management (`/api/users`)
 - Project creation and management (`/api/projects`)
-- Furniture catalog browsing (`/api/furniture`)
+- 3D objects catalog browsing (`/api/3d-objects`)
 - Health check (`/api/status`)
 
 Detailed API documentation is available at:
@@ -125,11 +125,3 @@ Adjust these settings in `app/main.py` as needed for your frontend development.
 - `app/core/database.py`: Database connection configuration
 - `app/api/`: API route handlers organized by resource
 - `app/api/dtos.py`: Data Transfer Objects for request/response validation
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a pull request
