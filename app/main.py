@@ -22,6 +22,11 @@ async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
     db = next(get_db())
     seed_database(db)
+    
+    # Загрузка тестовой модели в MinIO при старте
+    from app.services.minio_services import upload_folder
+    upload_folder("Boombox", "/Users/vadim/code/roomEditor/roomEditorBackend/Boombox", "my-test-bucket")
+    
     yield
     # Shutdown: здесь можно добавить cleanup код при необходимости
 
@@ -45,3 +50,6 @@ app.include_router(api_status)
 app.include_router(users_router)
 app.include_router(objects_3d_router)
 app.include_router(projects_router)
+
+
+

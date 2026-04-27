@@ -209,3 +209,6 @@ local/
 # Temporary test files
 test_*.py
 *_test.py
+
+
+Boombox/
