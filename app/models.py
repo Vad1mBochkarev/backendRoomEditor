@@ -1,7 +1,7 @@
 from typing import Optional
 from datetime import datetime
 from uuid import UUID, uuid4
-from sqlalchemy import ForeignKey, String, DateTime, UUID, Uuid, LargeBinary
+from sqlalchemy import ForeignKey, String, DateTime, Uuid, LargeBinary
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy import func
 
